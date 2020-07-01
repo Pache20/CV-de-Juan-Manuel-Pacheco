@@ -68,13 +68,49 @@ function validarGeneral(event) {
     revisarEmail(document.getElementById(`email`)) &&
     revisarNumeros(document.getElementById(`telefono`)) &&
     revisarConsulta(document.getElementById(`consulta`)) &&
-    revisarTerminos()) {
-    alert("El formulario esta listo para ser enviado");
+    revisarTerminos()
+  ) {
+    enviarEmail();
   } else {
-    alert(`ocurrio un error`);
+    document.getElementById(`msjEnviar`).className = `alert alert-primary my-4`;
+    document.getElementById(
+      `msjEnviar`
+    ).innerText = `Ocurrio un error en el envio`;
   }
 }
 
-//this tiene que ver con el contexto donde lo utilizo, en el html se esta utilizando solo en el input.
-//Si solo quiero mandar el id del objeto coloco (this.id)
-//Expresion regular es un patron que sigue cierta estructura mayormente se usa en los email.
+function enviarEmail() {
+  let template_params = {
+    from_name: document.getElementById(`nombre`).value,
+    to_name: "Juan Manuel Pacheco",
+    message_html: `telefono: ${
+      document.getElementById(`telefono`).value
+    } - Email: ${document.getElementById(`email`).value} - Consulta: ${
+      document.getElementById(`consulta`).value
+    }`,
+  };
+
+  let service_id = "default_service";
+  let template_id = "template_cuEimDdw";
+  emailjs.send(service_id, template_id, template_params).then(
+    function (response) {
+      //esto se ejecuta si el email se envio correctamente
+      console.log(response);
+      document.getElementById(
+        `msjEnviar`
+      ).className = `alert alert-primary my-4`;
+      document.getElementById(
+        `msjEnviar`
+      ).innerText = `Su consulta fue enviada`;
+    },
+    function (error) {
+      document.getElementById(
+        `msjEnviar`
+      ).className = `alert alert-primary my-4`;
+      document.getElementById(
+        `msjEnviar`
+      ).innerText = `Ocurrio un error en el envio`;
+      console.log("error", error);
+    }
+  );
+}
