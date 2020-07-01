@@ -10,6 +10,12 @@
     <script src="https://kit.fontawesome.com/6dac794d34.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_xx8Qwh38LoNsfl3FahgBX");
+   })();
+</script>
     <title>Juan Manuel Pacheco</title>
 </head>
 
@@ -121,8 +127,11 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" id="btn" type="submit">Enviar</button>
+                    <button class="btn btn-primary" id="btn" type="submit">Enviar</button> 
                 </form>
+                <div class="alert alert-primary my-4 d-none" id="msjEnviar" role="alert">
+
+                </div>
             </div>
         </section>
     </main>
